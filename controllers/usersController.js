@@ -41,7 +41,7 @@ const deleteUserById = async (req, res) => {
     let email = req.params.email;
     try {
         await User.deleteOne({ email });
-        res.send({ message: `Deleted Successly for email: ${email}` }).status(404);
+        res.send({ message: `Deleted Successly for email: ${email}` }).status(204);
     } catch (err) {
         return res.send(err).status(500);
     }
@@ -74,6 +74,7 @@ const createUser = async (req, res) => {
             password: hashedPassword
         });
         const result = await user.save();
+        result['status']=201;
         res.send(result).status(201);
 
     } catch (err) {
@@ -103,10 +104,11 @@ const login = async (req, res) => {
                 email: user.email,
                 username: user.username,
                 token: token,
-                message: "Logged in Successfully"
+                message: "Logged in Successfully",
+                status:'200'
             }).status(200);
         } else {
-            res.send({ message: 'invalid Credentails please enter correct details' });
+            res.send({ message: 'invalid Credentails please enter correct details', status:'500' });
 
         }
     }

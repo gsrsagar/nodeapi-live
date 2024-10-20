@@ -4,7 +4,8 @@
   "description": "MERN APi for the practice in lvie",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start":"nodemon index.js"
   },
   "keywords": [
     "MERN",
